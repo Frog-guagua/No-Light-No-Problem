@@ -7,16 +7,10 @@ namespace _Project.Scripts.NetWork
 {
     public class NetWorkLauncher : MonoBehaviourPunCallbacks
     {
-        private static NetWorkLauncher instance;
 
-        public static NetWorkLauncher Instance
-        {
-            //呱：在Lambda表达式里面 => 已经包含了return的意思了 那么就是说 我们不用写成return instance
-            get => instance;
+        //呱：c#的自动属性会帮你生成一个隐藏的私有字段 所以不用担心 唯一的单例走丢啦
+        public static NetWorkLauncher Instance{get; private set;}
 
-
-            private set => instance = value;
-        }
 
         private void Awake()
         {
@@ -26,7 +20,7 @@ namespace _Project.Scripts.NetWork
                 return;
             }
 
-            instance = this;
+            Instance = this;
             
             DontDestroyOnLoad(gameObject);
         }
