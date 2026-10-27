@@ -8,10 +8,11 @@ namespace _Project.Scripts.NetWork
     public class NetWorkLauncher : MonoBehaviourPunCallbacks
     {
 
+        #region 单例配置
+
         //呱：c#的自动属性会帮你生成一个隐藏的私有字段 所以不用担心 唯一的单例走丢啦
         public static NetWorkLauncher Instance{get; private set;}
-
-
+        
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -24,6 +25,8 @@ namespace _Project.Scripts.NetWork
             
             DontDestroyOnLoad(gameObject);
         }
+
+        #endregion
         
         
         void Start()
@@ -36,6 +39,7 @@ namespace _Project.Scripts.NetWork
         public override void OnConnectedToMaster()
         {
             Debug.Log("摩西摩西呆胶布得死噶");
+            
             
             //呱：嗯嗯我觉得可以在这里订阅 按下创建房间按钮后 然后订阅我们自己写个创建房间函数
             //   写一个空壳子试试~
