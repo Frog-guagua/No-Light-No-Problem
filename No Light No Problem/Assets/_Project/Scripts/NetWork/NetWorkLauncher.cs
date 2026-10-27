@@ -40,10 +40,7 @@ namespace _Project.Scripts.NetWork
         {
             Debug.Log("摩西摩西呆胶布得死噶");
             
-            
-            //呱：嗯嗯我觉得可以在这里订阅 按下创建房间按钮后 然后订阅我们自己写个创建房间函数
-            //   写一个空壳子试试~
-            //   写了一个CreateRoom ↓
+           
         }
 
         public bool CreateRoom(string roomName)
