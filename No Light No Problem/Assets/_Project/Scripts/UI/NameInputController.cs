@@ -73,10 +73,10 @@ public class NameInputController : MonoBehaviour
         EventBus.ConfirmPlayerName(inputField.text);
     }
     
-    private void SetUIState(float alpha,float duration ,CanvasGroup UICanvasGroup,GameObject UI)
+    private void SetUIState(float alpha,float duration ,CanvasGroup UICanvasGroup,GameObject UI,Ease ease)
     {
         UICanvasGroup.DOFade(alpha, duration).
-            SetEase(Ease.InQuad).
+            SetEase(ease).
             OnComplete(() =>
             {
                 UI.SetActive(alpha !=0);
@@ -85,11 +85,11 @@ public class NameInputController : MonoBehaviour
 
     private IEnumerator UIManager()
     {
-        SetUIState(0,0.5f,inputNameUICanvasGroup,inputNameUI);
+        SetUIState(0,0.5f,inputNameUICanvasGroup,inputNameUI,Ease.OutQuart);
         yield return new WaitForSeconds(0.5f);
-        SetUIState(1,1,displayerNameUICanvasGroup,displayerNameUI);
+        SetUIState(1,1,displayerNameUICanvasGroup,displayerNameUI,Ease.InQuad);
         yield return new WaitForSeconds(ShowNameDuration);
-        SetUIState(0,1,displayerNameUICanvasGroup,displayerNameUI);
+        SetUIState(0,1,displayerNameUICanvasGroup,displayerNameUI,Ease.OutQuart);
     }
     
 }
