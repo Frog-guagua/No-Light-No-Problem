@@ -49,10 +49,8 @@ namespace _Project.Scripts.NetWork
             return PhotonNetwork.JoinOrCreateRoom(roomName,new RoomOptions(){MaxPlayers = 4},default);
         }
         
+        
+        
 
-        void Update()
-        {
-
-        }
     }
 }
