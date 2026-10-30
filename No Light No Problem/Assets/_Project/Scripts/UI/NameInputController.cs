@@ -89,7 +89,7 @@ public class NameInputController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         SetUIState(1,1,displayerNameUICanvasGroup,displayerNameUI,Ease.InQuad);
         yield return new WaitForSeconds(ShowNameDuration);
-        SetUIState(0,1,displayerNameUICanvasGroup,displayerNameUI,Ease.OutQuart);
+        SceneTransitionManager.Instance.FadeOutSceneWithAllWhite("Menu_Start");
     }
     
 }
