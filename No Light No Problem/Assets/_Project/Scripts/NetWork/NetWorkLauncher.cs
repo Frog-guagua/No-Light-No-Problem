@@ -34,6 +34,7 @@ namespace _Project.Scripts.NetWork
             //呱：建立连接
             PhotonNetwork.ConnectUsingSettings();
             
+            //呱：订阅 【确认姓名】 这个事件
             EventBus.OnConfirmNameEvent += SetOwnPlayerName;
         }
 
@@ -41,7 +42,10 @@ namespace _Project.Scripts.NetWork
         public override void OnConnectedToMaster()
         {
             Debug.Log("摩西摩西呆胶布得死噶");
+            
+    
             SceneTransitionManager.Instance.FadeOutSceneWithAllWhite("Menu_PlayerSetup");
+
         }
 
         public bool CreateRoom(string roomName)

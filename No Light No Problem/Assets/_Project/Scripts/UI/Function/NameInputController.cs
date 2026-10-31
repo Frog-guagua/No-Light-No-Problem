@@ -33,13 +33,50 @@ public class NameInputController : MonoBehaviour
     //呱：我去终于要用上传说中的脏标记了吗我好激动
     private bool hasText;
 
-    void Start()
+    void Awake()
     {
+        SaveManager.Load();
+       
         nextButton.gameObject.SetActive(false);
         inputNameUICanvasGroup = inputNameUI.GetComponent<CanvasGroup>();
         displayerNameUICanvasGroup = displayerNameUI.GetComponent<CanvasGroup>();
+    
+        if (SaveManager.CurrentSettings.playerName == "")
+        {
+            
+            inputNameUICanvasGroup.enabled = true;
+            inputNameUICanvasGroup.alpha = 1f;
+            inputNameUICanvasGroup.blocksRaycasts = true;
+
+            displayerNameUICanvasGroup.enabled = true; 
+            displayerNameUICanvasGroup.alpha = 0f;     
+            displayerNameUICanvasGroup.blocksRaycasts = false;
+        }
+        else
+        {
+            
+            inputNameUICanvasGroup.enabled = true; 
+            inputNameUICanvasGroup.alpha = 0f;
+            inputNameUICanvasGroup.blocksRaycasts = false;
+
+            displayerNameUICanvasGroup.enabled = true;
+            displayerNameUICanvasGroup.alpha = 1f;
+            displayerNameUICanvasGroup.blocksRaycasts = true;
+        
+            nameText.text = 
+                $"<color=#4C4C4C><size=40>Welcome Back!</size></color>\n" +
+                $"<color=#1B1B1B><size=96>{SaveManager.CurrentSettings.playerName}</size></color>";
+            
+            StartCoroutine(WelcomePlayerUI());
+        }
     }
     
+    void Start()
+    {
+       
+    }
+    
+
     
     //呱：这个函数是用来给回调函数 OnValueChange 用的检测器
     //    当玩家真正输入内容以后再显示next的按钮
@@ -71,6 +108,9 @@ public class NameInputController : MonoBehaviour
     {
         //呱：将当前名字传给服务器
         EventBus.ConfirmPlayerName(inputField.text);
+        
+        //呱：把名字丢进存档里
+        SaveManager.CurrentSettings.playerName = inputField.text;
     }
     
     private void SetUIState(float alpha,float duration ,CanvasGroup UICanvasGroup,GameObject UI,Ease ease)
@@ -85,11 +125,21 @@ public class NameInputController : MonoBehaviour
 
     private IEnumerator UIManager()
     {
+        //呱：先存个档
+        SaveManager.Save(SaveManager.CurrentSettings);
+        
         SetUIState(0,0.5f,inputNameUICanvasGroup,inputNameUI,Ease.OutQuart);
         yield return new WaitForSeconds(0.5f);
+        displayerNameUICanvasGroup.enabled = true;
+        StartCoroutine(WelcomePlayerUI());
+    }
+
+    private IEnumerator WelcomePlayerUI()
+    {
         SetUIState(1,1,displayerNameUICanvasGroup,displayerNameUI,Ease.InQuad);
         yield return new WaitForSeconds(ShowNameDuration);
         SceneTransitionManager.Instance.FadeOutSceneWithAllWhite("Menu_Start");
     }
-    
+
+
 }

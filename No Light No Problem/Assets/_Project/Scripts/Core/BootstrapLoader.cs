@@ -20,7 +20,13 @@ public class BootstrapLoader : MonoBehaviour
     private IEnumerator WaitForInstanceInit()
     {
         yield return new WaitForSeconds(waitTime);
+
+      
         SceneTransitionManager.Instance.FadeOutSceneWithAllBlack("Scene_Splash");
+ 
+        
     }
+
+
     
 }

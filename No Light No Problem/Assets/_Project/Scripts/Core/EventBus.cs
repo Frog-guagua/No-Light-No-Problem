@@ -14,12 +14,21 @@ public static class EventBus
 
     //呱：这是一个 确定玩家本人的名字时 就执行的事件
     public static event Action<string> OnConfirmNameEvent;
+    
+
 
 
     //呱：供外界执行OnConfirmNameEvent的函数
     public static void ConfirmPlayerName(string playerName)
     {
         OnConfirmNameEvent?.Invoke(playerName);
+    }
+    
+    
+    //呱：在网络链接成功时 使用
+    public static void SuccessConnectedToMaster()
+    {
+        OnConnectToMasterEvent?.Invoke();
     }
 
 }
