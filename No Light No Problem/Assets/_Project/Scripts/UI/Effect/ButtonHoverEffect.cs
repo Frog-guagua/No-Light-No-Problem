@@ -138,12 +138,13 @@ public class ButtonHoverEffect : MonoBehaviour,IPointerEnterHandler,IPointerExit
     }
 
 
+    //呱：补丁喵
     private void OnDisable()
     {
         isHovering = false;
         buttonImage.DOColor(normalBackgroundColor, hoverFadeTime);
         buttonText.DOColor(normalTextColor, hoverFadeTime);
-        Debug.Log("哦莫UI关掉啦");
+
     }
     
 }

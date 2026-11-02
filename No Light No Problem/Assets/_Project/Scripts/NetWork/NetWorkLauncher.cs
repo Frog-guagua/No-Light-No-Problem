@@ -35,7 +35,10 @@ namespace _Project.Scripts.NetWork
             PhotonNetwork.ConnectUsingSettings();
             
             //呱：订阅 【确认姓名】 这个事件
-            EventBus.OnConfirmNameEvent += SetOwnPlayerName;
+            EventBus.OnConfirmPlayerNameEvent += SetOwnPlayerPlayerName;
+            
+            //呱：订阅 【确认房间名】 这个事件
+            EventBus.OnConfirmRoomNameEvent += CreateRoom;
         }
 
         //呱：如果成功连上了主服务器
@@ -48,14 +51,14 @@ namespace _Project.Scripts.NetWork
 
         }
 
-        public bool CreateRoom(string roomName)
+        public void CreateRoom(string roomName)
         {
-            
-            return PhotonNetwork.JoinOrCreateRoom(roomName,new RoomOptions(){MaxPlayers = 4},default);
+            PhotonNetwork.JoinOrCreateRoom(roomName,new RoomOptions(){MaxPlayers = 4},default);
+            Debug.Log($"成功创建房间：{roomName}");
         }
 
 
-        public void SetOwnPlayerName(string playerName)
+        public void SetOwnPlayerPlayerName(string playerName)
         {
             Debug.Log($"我记住你的名字了{playerName}");
             PhotonNetwork.NickName = playerName;

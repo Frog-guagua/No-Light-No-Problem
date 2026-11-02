@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Dynamic;
+using System.Resources;
 
 //呱：这个是事件总线 想要通过这个向两头传达消息
 //    莫名其妙觉得像三人组里那个缓和关系的人的定位
@@ -13,15 +14,18 @@ public static class EventBus
     public static event Action OnConnectToMasterEvent;
 
     //呱：这是一个 确定玩家本人的名字时 就执行的事件
-    public static event Action<string> OnConfirmNameEvent;
+    public static event Action<string> OnConfirmPlayerNameEvent;
     
-
+    
+    //呱：这是一个 确定房间名字的时候 就执行的事件
+    public static event Action<string> OnConfirmRoomNameEvent;
+    
 
 
     //呱：供外界执行OnConfirmNameEvent的函数
     public static void ConfirmPlayerName(string playerName)
     {
-        OnConfirmNameEvent?.Invoke(playerName);
+        OnConfirmPlayerNameEvent?.Invoke(playerName);
     }
     
     
@@ -29,6 +33,11 @@ public static class EventBus
     public static void SuccessConnectedToMaster()
     {
         OnConnectToMasterEvent?.Invoke();
+    }
+
+    public static void ConfirmRoomName(string roomName)
+    {
+        OnConfirmRoomNameEvent?.Invoke(roomName);
     }
 
 }
