@@ -17,10 +17,16 @@ public static class EventBus
     public static event Action<string> OnConfirmPlayerNameEvent;
     
     
-    //呱：这是一个 确定房间名字的时候 就执行的事件
-    public static event Action<string> OnConfirmRoomNameEvent;
+    //呱：这是一个 需要传房间密码的时候 就执行的事件
+    public static event Action<string,string> OnNeedRoomPasswordEvent;
     
-
+    //呱：这是一个 不需要传房间密码的时候 就执行的事件
+    public static event Action<string> OnNoNeedRoomPasswordEvent;
+    
+    //呱：这是一个 当你创建着房间 但是突然退出 就会执行的事件
+    public static event Action OnClickBackButton;
+    
+    //呱：这是用于房间人数变动的 事件
 
     //呱：供外界执行OnConfirmNameEvent的函数
     public static void ConfirmPlayerName(string playerName)
@@ -35,9 +41,26 @@ public static class EventBus
         OnConnectToMasterEvent?.Invoke();
     }
 
-    public static void ConfirmRoomName(string roomName)
+    
+    //呱：在需要密码来创建房间的时候 使用
+    public static void NeedRoomPassword(string roomName,string roomPassword)
     {
-        OnConfirmRoomNameEvent?.Invoke(roomName);
+        
+        OnNeedRoomPasswordEvent?.Invoke(roomName,roomPassword);
+    }
+    
+    
+    //呱：不需要密码来创建房间的时候 使用
+    public static void NoNeedRoomPassword(string roomName)
+    {
+        
+        OnNoNeedRoomPasswordEvent?.Invoke(roomName);
     }
 
+    
+    //呱：当按下 Back按钮的时候 就执行
+    public static void ClickBackButton()
+    {
+        OnClickBackButton?.Invoke();
+    }
 }
