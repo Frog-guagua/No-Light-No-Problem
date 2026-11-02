@@ -1,5 +1,6 @@
 #define DebugMode
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -135,4 +136,14 @@ public class ButtonHoverEffect : MonoBehaviour,IPointerEnterHandler,IPointerExit
         if (!isHovering) return;
 
     }
+
+
+    private void OnDisable()
+    {
+        isHovering = false;
+        buttonImage.DOColor(normalBackgroundColor, hoverFadeTime);
+        buttonText.DOColor(normalTextColor, hoverFadeTime);
+        Debug.Log("哦莫UI关掉啦");
+    }
+    
 }
