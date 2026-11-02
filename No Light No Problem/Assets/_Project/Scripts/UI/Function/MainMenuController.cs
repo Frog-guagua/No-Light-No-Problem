@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+public enum E_ChooseButton
+{
+    CreateRoom,
+    JoinRoom,
+    Setting
+}
+
+
 public class MainMenuController : MonoBehaviour
 {
    [Header("主菜单的UI")]
@@ -28,9 +36,59 @@ public class MainMenuController : MonoBehaviour
    void Awake()
    {
        mainMenuCanvasGroup = mainMenu.GetComponent<CanvasGroup>();
+       mainMenuCanvasGroup.alpha = 1;
+       
        createRoomCanvasGroup = createRoom.GetComponent<CanvasGroup>();
-       createRoomCanvasGroup = createRoom.GetComponent<CanvasGroup>();
+       createRoomCanvasGroup.alpha = 0;
+       
        joinRoomCanvasGroup = joinRoom.GetComponent<CanvasGroup>();
+       joinRoomCanvasGroup.alpha = 0;
+       
+       settingCanvasGroup = setting.GetComponent<CanvasGroup>();
+       settingCanvasGroup.alpha = 0;
+       
+       
+   }
+
+   public void BackToMainMenuFrom(E_ChooseButton choice)
+   {
+       switch (choice)
+       {
+           case E_ChooseButton.CreateRoom:
+               createRoomCanvasGroup.DOFade(0, switchUIDuration / 2)
+                   .SetEase(Ease.OutQuad)
+                   .OnComplete(() =>
+                   {
+                       createRoom.SetActive(false);
+                       mainMenu.SetActive(true);
+                       mainMenuCanvasGroup.DOFade(1, switchUIDuration / 2)
+                           .SetEase(Ease.InQuad);
+                   });
+               break;
+           case E_ChooseButton.JoinRoom:
+               joinRoomCanvasGroup.DOFade(0, switchUIDuration / 2)
+                   .SetEase(Ease.OutQuad)
+                   .OnComplete(() =>
+                   {
+                       joinRoom.SetActive(false);
+                       mainMenu.SetActive(true);
+                       mainMenuCanvasGroup.DOFade(1, switchUIDuration / 2)
+                           .SetEase(Ease.InQuad);
+                   });
+               break;
+           case E_ChooseButton.Setting:
+               settingCanvasGroup.DOFade(0, switchUIDuration / 2)
+                   .SetEase(Ease.OutQuad)
+                   .OnComplete(() =>
+                   {
+                       setting.SetActive(false);
+                       mainMenu.SetActive(true);
+                       mainMenuCanvasGroup.DOFade(1, switchUIDuration / 2)
+                           .SetEase(Ease.InQuad);
+                   });
+               break;
+               
+       }
    }
 
    private void FadeTo(CanvasGroup cg, GameObject o)
