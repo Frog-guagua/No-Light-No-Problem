@@ -67,6 +67,7 @@ public class NameInputController : MonoBehaviour
                 $"<color=#4C4C4C><size=40>Welcome Back!</size></color>\n" +
                 $"<color=#1B1B1B><size=96>{SaveManager.CurrentSettings.playerName}</size></color>";
             
+            EventBus.ConfirmPlayerName(SaveManager.CurrentSettings.playerName); 
             StartCoroutine(WelcomePlayerUI());
         }
     }
@@ -142,4 +143,6 @@ public class NameInputController : MonoBehaviour
     }
 
 
+    
+    
 }

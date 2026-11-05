@@ -458,9 +458,10 @@ MonoBehaviour:
   - {fileID: 2111851622}
   activeColor: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
   inactiveColor: {r: 0.89411765, g: 0.89411765, b: 0.89411765, a: 1}
-  nowPlayerNum: {fileID: 1888811681}
-  roundFadeDuration: 1
+  nowPlayerNumText: {fileID: 1888811681}
+  roundFadeDuration: 0.5
   playerWaitHint: {fileID: 1635736219}
+  startGameButton: {fileID: 796211192}
 --- !u!225 &36712556
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3343,6 +3344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 796211191}
   - component: {fileID: 796211194}
+  - component: {fileID: 796211195}
   - component: {fileID: 796211193}
   - component: {fileID: 796211192}
   m_Layer: 5
@@ -3454,6 +3456,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796211190}
   m_CullTransparentMesh: 1
+--- !u!114 &796211195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796211190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c512d253d6e21448835f8d51b5aff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inactiveBackgroundColor: {r: 0.8235295, g: 0.8235295, b: 0.8235295, a: 1}
+  inactiveTextColor: {r: 0.57254905, g: 0.57254905, b: 0.57254905, a: 1}
+  activeBackgroundColor: {r: 0.23270428, g: 0.23270428, b: 0.23270428, a: 1}
+  activeTextColor: {r: 1, g: 1, b: 1, a: 1}
+  fadeDuration: 0.5
 --- !u!1 &801322270
 GameObject:
   m_ObjectHideFlags: 0
@@ -5899,6 +5918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1635736221}
   - component: {fileID: 1635736220}
+  - component: {fileID: 1635736222}
   - component: {fileID: 1635736219}
   m_Layer: 5
   m_Name: TMP_WaitingHint
@@ -6024,6 +6044,21 @@ RectTransform:
   m_AnchoredPosition: {x: 209, y: -352}
   m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1635736222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635736218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1015eda6c34d6d74a8f11ae684945448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitingText: {fileID: 1635736219}
+  typingSingleLetterTime: 0.2
+  displayWholeSentenceTime: 3
 --- !u!1 &1641198105
 GameObject:
   m_ObjectHideFlags: 0
@@ -6326,7 +6361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: guaguaguagua
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d14e884e6a2b2c64d9e4edb097142cfe, type: 2}
   m_sharedMaterial: {fileID: -1196048930447683826, guid: d14e884e6a2b2c64d9e4edb097142cfe,
@@ -6626,7 +6661,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: guaguaguagua
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d14e884e6a2b2c64d9e4edb097142cfe, type: 2}
   m_sharedMaterial: {fileID: -1196048930447683826, guid: d14e884e6a2b2c64d9e4edb097142cfe,
@@ -9019,7 +9054,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: guaguaguagua
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d14e884e6a2b2c64d9e4edb097142cfe, type: 2}
   m_sharedMaterial: {fileID: -1196048930447683826, guid: d14e884e6a2b2c64d9e4edb097142cfe,
@@ -9596,7 +9631,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: guaguaguagua
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d14e884e6a2b2c64d9e4edb097142cfe, type: 2}
   m_sharedMaterial: {fileID: -1196048930447683826, guid: d14e884e6a2b2c64d9e4edb097142cfe,

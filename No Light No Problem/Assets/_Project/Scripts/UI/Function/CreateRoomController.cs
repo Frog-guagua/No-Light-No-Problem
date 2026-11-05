@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -43,8 +44,7 @@ public class CreateRoomController : MonoBehaviour
 
     [Header("当前玩家名字列表")] 
     public List<TextMeshProUGUI> nowPlayerNameText;
-    //呱：用这个判定是进人了还是少人了
-    private int lastPlayerNum;
+
     
     [Header("玩家圆圈")]
     public List<Image> playerImageList;
@@ -52,8 +52,8 @@ public class CreateRoomController : MonoBehaviour
     public Color inactiveColor;
     
     [Header("当前玩家数目")]
-    public TextMeshProUGUI nowPlayerNum;
-    
+    public TextMeshProUGUI nowPlayerNumText;
+
     [Header("圆圈变颜色的时间")]
     public float roundFadeDuration;
     
@@ -61,23 +61,33 @@ public class CreateRoomController : MonoBehaviour
     [Header("玩家等待提示")]
     public TextMeshProUGUI playerWaitHint;
     
-
-
+    [Header("开始游戏按钮")]
+    public Button startGameButton;
+    private ButtonActiveEffect buttonActiveEffect;
+    
     //呱：依旧脏标记 依旧美味
     private bool hasText;
     
-    //呱：用来存储目前房间里的人
-    private List<string> currentNames = new List<string>();
+
 
     void Awake()
     {
-        
+        buttonActiveEffect = startGameButton.GetComponent<ButtonActiveEffect>();
         inputRoomNameCanvasGroup.alpha = 1;
         passwordCanvasGroup.alpha = 0;
         passwordCanvasGroup.gameObject.SetActive(false);
     }
-    
-    
+
+    private void OnEnable()
+    {
+        EventBus.OnPlayerNumChangedEvent += UpdateCurrentPlayerUI;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.OnPlayerNumChangedEvent -= UpdateCurrentPlayerUI;
+    }
+
     //呱：这个依旧是给外面 输入房间名字的输入框 的回调函数 OnValueChanged 用的
     //   如果目前还没有输入 那么就不会出现“确认按钮”
     public void SetButtonStateForRoomName(string nowInputText)
@@ -95,23 +105,17 @@ public class CreateRoomController : MonoBehaviour
     //   只有输入4位才能确定 少了不会出现确认按钮
     public void SetButtonStateForPassword(string nowInputText)
     {
-
-        if (nowInputText.Length <= 3) return;
-
-            confirmPasswordButton.gameObject.SetActive(true);
+        confirmPasswordButton.gameObject.SetActive(nowInputText.Length == 4);
         
     }
-
     
     //呱：当 按下 Back 按钮的时候执行
     public void OnClickBackButton()
     {
-        //EventBus.ClickBackButton();
-        
+        //呱：回到主界面
         mainMenuController.GetComponent<MainMenuController>().BackToMainMenuFrom(E_ChooseButton.CreateRoom);
         
     }
-
     
     //呱：如果玩家决定好了房间名字
     public void OnClickConfirmNameButton()
@@ -124,8 +128,10 @@ public class CreateRoomController : MonoBehaviour
         
     }
     
+    //呱：如果玩家选择需要密码 来创建房间
     public void OnNeedPassword()
     {
+        inputRoomNameCanvasGroup.gameObject.SetActive(false);
         setPasswordCanvasGroup.gameObject.SetActive(true);
         choosePasswordCanvasGroup.gameObject.SetActive(false);
 
@@ -133,6 +139,7 @@ public class CreateRoomController : MonoBehaviour
         //EventBus.ConfirmRoomPassword(roomNameInputField.text,asswordInputField.text);
     }
 
+    //呱：如果玩家确认了密码
     public void OnConfirmPassword()
     {
         inputRoomNameCanvasGroup.gameObject.SetActive(false);
@@ -142,16 +149,52 @@ public class CreateRoomController : MonoBehaviour
         waitingCanvasGroup.gameObject.SetActive(true);
     }
 
+    //呱：如果玩家不需要密码 来创建房间
     public void OnNoNeedPassword()
     {
+        inputRoomNameCanvasGroup.gameObject.SetActive(false);
         passwordCanvasGroup.gameObject.SetActive(false);
         choosePasswordCanvasGroup.gameObject.SetActive(false);
         EventBus.NoNeedRoomPassword(roomNameInputField.text);
         waitingCanvasGroup.gameObject.SetActive(true);
     }
 
-  
- 
+    //呱：用来更新等待界面的玩家头像和名字UI
+    public void UpdateCurrentPlayerUI(string[] playerNames,int playerNum)
+    {
+      
+        
+        for (int i = 0; i < playerImageList.Count; i++)
+        {
+            if (i < playerNames.Length)
+            {
+                nowPlayerNameText[i].text = playerNames[i];
+                playerImageList[i].DOColor(activeColor, roundFadeDuration).SetEase(Ease.InSine);
+            }
+            else
+            {
+                nowPlayerNameText[i].text = "";
+                playerImageList[i].DOColor(inactiveColor, roundFadeDuration).SetEase(Ease.OutSine);
+            }
+            
+        }
+        
+        nowPlayerNumText.text = $"({playerNum})/4";
 
+        if (playerNum == 4)
+        {
+            startGameButton.interactable = true;
+            buttonActiveEffect.ActiveButton();
+        }
+        else
+        {
+            startGameButton.interactable = false;
+            buttonActiveEffect.InactiveButton();
+        }
+        
+    }
+    
+    //呱：玩家确定开始游戏
+    
     
 }

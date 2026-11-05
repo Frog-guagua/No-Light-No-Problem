@@ -107,6 +107,7 @@ public class MainMenuController : MonoBehaviour
    
    public void OnClickCreateRoomButton()
    {
+       
        FadeTo(createRoomCanvasGroup,createRoom);
    }
 

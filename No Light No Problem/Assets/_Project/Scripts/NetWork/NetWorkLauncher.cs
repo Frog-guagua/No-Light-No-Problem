@@ -30,12 +30,15 @@ namespace _Project.Scripts.NetWork
 
         #endregion
         
+        public static int nowPlayerCount = 0;
         
         void Start()
         {
             //呱：建立连接
             PhotonNetwork.ConnectUsingSettings();
-            
+
+            #region 订阅事件
+
             //呱：订阅 【确认姓名】 这个事件
             EventBus.OnConfirmPlayerNameEvent += SetOwnPlayerPlayerName;
             
@@ -44,21 +47,20 @@ namespace _Project.Scripts.NetWork
             
             //呱：订阅 【不需要房间名】 这个事件
             EventBus.OnNoNeedRoomPasswordEvent += CreateRoomWithoutPassword;
-            
-            EventBus.OnClickBackButton += CloseCurrentRoom;
+
+            #endregion
         }
 
+        
         //呱：如果成功连上了主服务器
         public override void OnConnectedToMaster()
         {
             Debug.Log("摩西摩西呆胶布得死噶");
-            
-    
             SceneTransitionManager.Instance.FadeOutSceneWithAllWhite("Menu_PlayerSetup");
 
         }
 
-        
+        //呱：如果 创建房间的时候 需要密码
         public void CreateRoomWithPassword(string roomName, string roomPassword)
         {
             RoomOptions roomOptions = new RoomOptions();
@@ -72,25 +74,50 @@ namespace _Project.Scripts.NetWork
             Debug.Log($"成功创建房间：{roomName},密码为{roomPassword}");
         }
 
-        
+        //呱：如果  创建房间的时候 不需要密码
         public void CreateRoomWithoutPassword(string roomName)
         {
             PhotonNetwork.JoinOrCreateRoom(roomName,new RoomOptions(){MaxPlayers = 4},default);
             Debug.Log($"成功创建房间：{roomName},无密码");
         }
 
-        
+        //呱：如果玩家 需要设置自己的名字
         public void SetOwnPlayerPlayerName(string playerName)
         {
             Debug.Log($"我记住你的名字了{playerName}");
             PhotonNetwork.NickName = playerName;
         }
 
-        
-        public void CloseCurrentRoom()
+        public override void OnJoinedRoom()
         {
-            PhotonNetwork.LeaveRoom();
+            GetRoomPlayerNamesAndNums();
         }
+
+
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            GetRoomPlayerNamesAndNums();
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            GetRoomPlayerNamesAndNums();
+        }
+
+
+        private void GetRoomPlayerNamesAndNums()
+        {
+            string[] playerNames = new string[PhotonNetwork.PlayerList.Length];
+
+            for (int i = 0; i < playerNames.Length; i++)
+            {
+                playerNames[i] = PhotonNetwork.PlayerList[i].NickName;
+            }
+
+            nowPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+            EventBus.PlayerNumChanged(playerNames, PhotonNetwork.CurrentRoom.PlayerCount); 
+        }
+        
         
     }
 }
