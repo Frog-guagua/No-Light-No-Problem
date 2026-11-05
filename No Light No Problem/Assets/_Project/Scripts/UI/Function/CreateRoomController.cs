@@ -179,7 +179,7 @@ public class CreateRoomController : MonoBehaviour
             
         }
         
-        nowPlayerNumText.text = $"({playerNum})/4";
+        nowPlayerNumText.text = $"({playerNum}/4)";
 
         if (playerNum == 4)
         {
