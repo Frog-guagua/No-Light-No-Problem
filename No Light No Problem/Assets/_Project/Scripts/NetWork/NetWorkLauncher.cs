@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using Photon.Pun;
 using UnityEngine;
 using Photon.Realtime;
@@ -93,26 +94,38 @@ namespace _Project.Scripts.NetWork
             GetRoomPlayerNamesAndNums();
         }
 
-
+        //呱：当有玩家进入房间
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             GetRoomPlayerNamesAndNums();
         }
-
+        
+        //呱：当有玩家离开房间
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
             GetRoomPlayerNamesAndNums();
         }
 
-
+        //呱：获取当前玩家名单 并且把房主排在第一个 传给UI层
         private void GetRoomPlayerNamesAndNums()
         {
+            Player master = PhotonNetwork.MasterClient;
+            if (master == null) return; 
+            
             string[] playerNames = new string[PhotonNetwork.PlayerList.Length];
+            playerNames[0] =master.NickName;
+            int count = 1;
+           
 
-            for (int i = 0; i < playerNames.Length; i++)
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             {
-                playerNames[i] = PhotonNetwork.PlayerList[i].NickName;
+                if (PhotonNetwork.PlayerList[i] != master )
+                {
+                    playerNames[count] =PhotonNetwork.PlayerList[i].NickName;
+                        count++;
+                }
             }
+            
 
             nowPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
             EventBus.PlayerNumChanged(playerNames, PhotonNetwork.CurrentRoom.PlayerCount); 
