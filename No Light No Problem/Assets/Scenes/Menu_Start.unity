@@ -451,6 +451,7 @@ MonoBehaviour:
   - {fileID: 1679126592}
   - {fileID: 2132797139}
   - {fileID: 1716548028}
+  nowRoomNameText: {fileID: 1633678652}
   playerImageList:
   - {fileID: 2122625667}
   - {fileID: 2099245480}

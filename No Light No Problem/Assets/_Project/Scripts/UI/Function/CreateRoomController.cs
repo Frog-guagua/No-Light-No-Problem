@@ -45,6 +45,8 @@ public class CreateRoomController : MonoBehaviour
     [Header("当前玩家名字列表")] 
     public List<TextMeshProUGUI> nowPlayerNameText;
 
+    [Header("当前创建好的房间名")]
+    public TextMeshProUGUI nowRoomNameText;
     
     [Header("玩家圆圈")]
     public List<Image> playerImageList;
@@ -72,6 +74,7 @@ public class CreateRoomController : MonoBehaviour
 
     void Awake()
     {
+        nowRoomNameText.text = "";
         buttonActiveEffect = startGameButton.GetComponent<ButtonActiveEffect>();
         inputRoomNameCanvasGroup.alpha = 1;
         passwordCanvasGroup.alpha = 0;
@@ -120,7 +123,7 @@ public class CreateRoomController : MonoBehaviour
     //呱：如果玩家决定好了房间名字
     public void OnClickConfirmNameButton()
     {
-
+        nowRoomNameText.text = roomNameInputField.text;
         passwordCanvasGroup.gameObject.SetActive(true);
         //呱：弹出是否需密码的弹窗
         passwordCanvasGroup.DOFade(1, popupFadeDuration)
