@@ -9,6 +9,9 @@ using UnityEngine.Serialization;
 
 public class JoinRoomController : MonoBehaviour
 {
+    [Header("主菜单控制器")]
+    public GameObject mainMenuController;
+    
     [Header("标签TabChooseEffect的列表")]
     public List<TabChooseEffect> tabList = new List<TabChooseEffect>();
 
@@ -40,6 +43,12 @@ public class JoinRoomController : MonoBehaviour
         basicPanel.transform.SetSiblingIndex(index);
     }
 
+    public void OnClickBackButton()
+    {
+        //呱：回到主界面
+        mainMenuController.GetComponent<MainMenuController>().BackToMainMenuFrom(E_ChooseButton.JoinRoom);
+        
+    }
    
     
 }
