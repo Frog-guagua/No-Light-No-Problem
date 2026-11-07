@@ -485,6 +485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 41990055}
   - component: {fileID: 41990054}
+  - component: {fileID: 41990056}
   - component: {fileID: 41990052}
   - component: {fileID: 41990051}
   - component: {fileID: 41990053}
@@ -544,8 +545,8 @@ MonoBehaviour:
         m_MethodName: OnChooseTab
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 41990051}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 41990056}
+          m_ObjectArgumentAssemblyTypeName: TabChooseEffect, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -625,6 +626,31 @@ RectTransform:
   m_AnchoredPosition: {x: -190.8, y: 66.8}
   m_SizeDelta: {x: 160, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &41990056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41990050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a879924bf6f39e04b8b697abcb2fe922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 41990051}
+  mainText: {fileID: 1633802945}
+  subText: {fileID: 376741769}
+  showTabBackgroundColor: {r: 0.16470589, g: 0.16470589, b: 0.16470589, a: 1}
+  showTabMainTextColor: {r: 1, g: 1, b: 1, a: 1}
+  showTabSubTextColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+  hideTabBackgroundColor: {r: 0.9960785, g: 0.9960785, b: 0.9960785, a: 1}
+  hideTabMainTextColor: {r: 0.19215688, g: 0.19215688, b: 0.19215688, a: 1}
+  hideTabSubTextColor: {r: 0.57254905, g: 0.57254905, b: 0.57254905, a: 1}
+  showPosX: -177.2
+  hidePosX: -190.8
+  hideDuration: 0.5
+  showDuration: 0.5
 --- !u!1 &60414115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1512,7 @@ GameObject:
   - component: {fileID: 376741770}
   - component: {fileID: 376741769}
   m_Layer: 5
-  m_Name: TMP_SearchRoom_CN
+  m_Name: TMP_MultiplayerLobby_CN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1531,7 +1557,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u67E5\u627E\u623F\u95F4"
+  m_text: "\u8054\u673A\u5927\u5385"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bf2c0c3e359ff204397a10d5854415d2, type: 2}
   m_sharedMaterial: {fileID: 6585012407874403804, guid: bf2c0c3e359ff204397a10d5854415d2,
@@ -4269,6 +4295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 847818052}
   - component: {fileID: 847818056}
+  - component: {fileID: 847818057}
   - component: {fileID: 847818055}
   - component: {fileID: 847818054}
   - component: {fileID: 847818053}
@@ -4364,8 +4391,8 @@ MonoBehaviour:
         m_MethodName: OnChooseTab
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 847818054}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 847818057}
+          m_ObjectArgumentAssemblyTypeName: TabChooseEffect, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4384,7 +4411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.16352195, g: 0.16352195, b: 0.16352195, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4409,6 +4436,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847818051}
   m_CullTransparentMesh: 1
+--- !u!114 &847818057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847818051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a879924bf6f39e04b8b697abcb2fe922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 847818054}
+  mainText: {fileID: 0}
+  subText: {fileID: 0}
+  showTabBackgroundColor: {r: 0.16470589, g: 0.16470589, b: 0.16470589, a: 1}
+  showTabMainTextColor: {r: 1, g: 1, b: 1, a: 1}
+  showTabSubTextColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+  hideTabBackgroundColor: {r: 0.9960785, g: 0.9960785, b: 0.9960785, a: 1}
+  hideTabMainTextColor: {r: 0.19215688, g: 0.19215688, b: 0.19215688, a: 1}
+  hideTabSubTextColor: {r: 0.57254905, g: 0.57254905, b: 0.57254905, a: 1}
+  showPosX: -177.2
+  hidePosX: -190.8
+  hideDuration: 0.5
+  showDuration: 0.5
 --- !u!1 &860875954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4717,8 +4769,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4925,17 +4977,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03273d68beae6cd4a9020232d409a0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabButtonList:
-  - {fileID: 41990051}
-  - {fileID: 847818054}
-  showTabBackgroundColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
-  showTabTextColor: {r: 1, g: 1, b: 1, a: 1}
-  hideTabBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  hideTabTextColor: {r: 0.20000002, g: 0.20000002, b: 0.20000002, a: 1}
-  showPosX: -177.2
-  hidePosX: -190.8
-  hideDuration: 0.3
-  showDuration: 0.3
+  tabList:
+  - {fileID: 41990056}
+  - {fileID: 847818057}
   basicPanel: {fileID: 418347625}
 --- !u!1 &1058555120
 GameObject:
@@ -6569,7 +6613,7 @@ GameObject:
   - component: {fileID: 1633802946}
   - component: {fileID: 1633802945}
   m_Layer: 5
-  m_Name: TMP_SearchRoom_EN
+  m_Name: TMP_MultiplayerLobby_EN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6614,7 +6658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SearchRoom
+  m_text: Lobby
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b57a8bf30ba2fe4d8cb6da4b094cfc7, type: 2}
   m_sharedMaterial: {fileID: -7458706419651461229, guid: 0b57a8bf30ba2fe4d8cb6da4b094cfc7,
@@ -8438,8 +8482,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283914071
-  m_fontColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+    rgba: 4292335575
+  m_fontColor: {r: 0.84276724, g: 0.84276724, b: 0.84276724, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
