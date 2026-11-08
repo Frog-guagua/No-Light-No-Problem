@@ -21,9 +21,11 @@ public class JoinRoomController : MonoBehaviour
     
     [Header("搜索房间的CanvasGroup")]
     public CanvasGroup searchRoomCanvasGroup;
+    private CanvasMoveEffect searchRoomCanvasMoveEffect;
     
     [Header("联机大厅的CanvasGroup")]
     public CanvasGroup lobbyCanvasGroup;
+    private CanvasMoveEffect lobbyCanvasMoveEffect;
     
     [Header("切换页面的间隔")]
     public float fadeDuration = 0.3f;
@@ -35,6 +37,9 @@ public class JoinRoomController : MonoBehaviour
     {
         //呱：目前显示的CanvasGroup
         currentShowCanvasGroup = searchRoomCanvasGroup;
+        
+        searchRoomCanvasMoveEffect = searchRoomCanvasGroup.GetComponent<CanvasMoveEffect>();
+        lobbyCanvasMoveEffect = lobbyCanvasGroup.GetComponent<CanvasMoveEffect>();
     }
     
     //呱：这里想写个很通用的 可以泛用给所有标签按钮 的函数
@@ -76,7 +81,10 @@ public class JoinRoomController : MonoBehaviour
     {
         if (currentShowCanvasGroup == searchRoomCanvasGroup) return;
             
-
+        CanvasMoveEffect currentShowCanvasMoveEffect = currentShowCanvasGroup.GetComponent<CanvasMoveEffect>();
+        currentShowCanvasMoveEffect.MoveToHide();
+        
+        
         currentShowCanvasGroup.DOFade(0, fadeDuration)
             .SetEase(Ease.InQuad)
             .OnComplete(() =>
@@ -84,6 +92,7 @@ public class JoinRoomController : MonoBehaviour
                 currentShowCanvasGroup.gameObject.SetActive(false);
                 
                 searchRoomCanvasGroup.gameObject.SetActive(true);
+                searchRoomCanvasMoveEffect.MoveToShow();
                 searchRoomCanvasGroup.DOFade(1, fadeDuration)
                     .SetEase(Ease.OutQuad)
                     .OnComplete(() =>
@@ -98,6 +107,10 @@ public class JoinRoomController : MonoBehaviour
     public void OnClickLobbyTab()
     {
         if (currentShowCanvasGroup == lobbyCanvasGroup) return;
+        
+        CanvasMoveEffect currentShowCanvasMoveEffect = currentShowCanvasGroup.GetComponent<CanvasMoveEffect>();
+        currentShowCanvasMoveEffect.MoveToHide();
+        
         currentShowCanvasGroup.DOFade(0, fadeDuration)
             .SetEase(Ease.InQuad)
             .OnComplete(() =>
@@ -105,6 +118,7 @@ public class JoinRoomController : MonoBehaviour
                 currentShowCanvasGroup.gameObject.SetActive(false);
                 
                 lobbyCanvasGroup.gameObject.SetActive(true);
+                lobbyCanvasMoveEffect.MoveToShow();
                 lobbyCanvasGroup.DOFade(1, fadeDuration)
                     .SetEase(Ease.OutQuad)
                     .OnComplete(() =>
