@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using DG.Tweening;
+using Photon.Pun.Demo.Cockpit;
 using TMPro;
 using UnityEngine.Serialization;
 
@@ -17,7 +18,25 @@ public class JoinRoomController : MonoBehaviour
 
     [Header("基础Panel")]
     public  GameObject basicPanel;
+    
+    [Header("搜索房间的CanvasGroup")]
+    public CanvasGroup searchRoomCanvasGroup;
+    
+    [Header("联机大厅的CanvasGroup")]
+    public CanvasGroup lobbyCanvasGroup;
+    
+    [Header("切换页面的间隔")]
+    public float fadeDuration = 0.3f;
+    
+    //呱：目前正在展示的CanvasGroup
+    private CanvasGroup currentShowCanvasGroup;
 
+    void Awake()
+    {
+        //呱：目前显示的CanvasGroup
+        currentShowCanvasGroup = searchRoomCanvasGroup;
+    }
+    
     //呱：这里想写个很通用的 可以泛用给所有标签按钮 的函数
     public void OnChooseTab(TabChooseEffect chosenButton)
     {
@@ -43,6 +62,7 @@ public class JoinRoomController : MonoBehaviour
         basicPanel.transform.SetSiblingIndex(index);
     }
 
+    //呱：按下返回按钮的时候执行
     public void OnClickBackButton()
     {
         //呱：回到主界面
@@ -50,5 +70,51 @@ public class JoinRoomController : MonoBehaviour
         
     }
    
+    
+    //呱：按下搜索房间的标签
+    public void OnClickSearchRoomTab()
+    {
+        if (currentShowCanvasGroup == searchRoomCanvasGroup) return;
+            
+
+        currentShowCanvasGroup.DOFade(0, fadeDuration)
+            .SetEase(Ease.InQuad)
+            .OnComplete(() =>
+            {
+                currentShowCanvasGroup.gameObject.SetActive(false);
+                
+                searchRoomCanvasGroup.gameObject.SetActive(true);
+                searchRoomCanvasGroup.DOFade(1, fadeDuration)
+                    .SetEase(Ease.OutQuad)
+                    .OnComplete(() =>
+                    {
+                        currentShowCanvasGroup =  searchRoomCanvasGroup;
+                    });
+
+            });
+    }
+    
+    //呱：按下搜索房间的标签
+    public void OnClickLobbyTab()
+    {
+        if (currentShowCanvasGroup == lobbyCanvasGroup) return;
+        currentShowCanvasGroup.DOFade(0, fadeDuration)
+            .SetEase(Ease.InQuad)
+            .OnComplete(() =>
+            {
+                currentShowCanvasGroup.gameObject.SetActive(false);
+                
+                lobbyCanvasGroup.gameObject.SetActive(true);
+                lobbyCanvasGroup.DOFade(1, fadeDuration)
+                    .SetEase(Ease.OutQuad)
+                    .OnComplete(() =>
+                    {
+                        currentShowCanvasGroup =  lobbyCanvasGroup;
+                    });
+
+            });
+    }
+        
+        
     
 }
