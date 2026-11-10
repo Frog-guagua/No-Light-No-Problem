@@ -4801,15 +4801,15 @@ MonoBehaviour:
     endPos: {x: 0, y: 182}
     canvasGroup: {fileID: 2066244676}
     rectTransform: {fileID: 2066244675}
-    moveDuration: 0.5
+    moveDuration: 0.3
     moveEase: 1
   - startPos: {x: 48, y: 65}
     endPos: {x: 48, y: 182}
     canvasGroup: {fileID: 1800668553}
     rectTransform: {fileID: 1800668552}
-    moveDuration: 0.5
+    moveDuration: 0.3
     moveEase: 2
-  waitingTime: 0.5
+  waitingTime: 0
 --- !u!1 &751988340
 GameObject:
   m_ObjectHideFlags: 0
@@ -5643,7 +5643,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1047423336}
+        m_TargetAssemblyTypeName: JoinRoomController, Assembly-CSharp
+        m_MethodName: OnInputSelected
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls: []

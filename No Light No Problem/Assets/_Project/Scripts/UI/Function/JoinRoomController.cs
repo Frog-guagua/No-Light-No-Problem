@@ -164,4 +164,10 @@ public class JoinRoomController : MonoBehaviour
 
     }    
     
+     public void OnInputSelected(string currentText)
+    {
+        canvasParticalMoveEffect.CanvasSlideOut();
+    }
+
+    
 }
