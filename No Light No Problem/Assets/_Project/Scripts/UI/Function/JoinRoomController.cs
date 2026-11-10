@@ -22,6 +22,7 @@ public class JoinRoomController : MonoBehaviour
     [Header("搜索房间的CanvasGroup")]
     public CanvasGroup searchRoomCanvasGroup;
     private CanvasMoveEffect searchRoomCanvasMoveEffect;
+    private CanvasParticalMoveEffect canvasParticalMoveEffect;
     
     [Header("联机大厅的CanvasGroup")]
     public CanvasGroup lobbyCanvasGroup;
@@ -30,8 +31,16 @@ public class JoinRoomController : MonoBehaviour
     [Header("切换页面的间隔")]
     public float fadeDuration = 0.3f;
     
+    [Header("搜索框的确认Button")]
+    public Button searchButton;
+    
+
+    
     //呱：目前正在展示的CanvasGroup
     private CanvasGroup currentShowCanvasGroup;
+    
+    //呱：给按钮的状态用的脏标记
+    private bool hasText;
 
     void Awake()
     {
@@ -39,6 +48,7 @@ public class JoinRoomController : MonoBehaviour
         currentShowCanvasGroup = searchRoomCanvasGroup;
         
         searchRoomCanvasMoveEffect = searchRoomCanvasGroup.GetComponent<CanvasMoveEffect>();
+        canvasParticalMoveEffect = searchRoomCanvasGroup.GetComponent<CanvasParticalMoveEffect>();
         lobbyCanvasMoveEffect = lobbyCanvasGroup.GetComponent<CanvasMoveEffect>();
     }
     
@@ -66,6 +76,7 @@ public class JoinRoomController : MonoBehaviour
         //呱：把基础面板放在 被选择的按钮 下面一层
         basicPanel.transform.SetSiblingIndex(index);
     }
+    
 
     //呱：按下返回按钮的时候执行
     public void OnClickBackButton()
@@ -74,7 +85,6 @@ public class JoinRoomController : MonoBehaviour
         mainMenuController.GetComponent<MainMenuController>().BackToMainMenuFrom(E_ChooseButton.JoinRoom);
         
     }
-   
     
     //呱：按下搜索房间的标签
     public void OnClickSearchRoomTab()
@@ -103,7 +113,7 @@ public class JoinRoomController : MonoBehaviour
             });
     }
     
-    //呱：按下搜索房间的标签
+    //呱：按下联机大厅的标签
     public void OnClickLobbyTab()
     {
         if (currentShowCanvasGroup == lobbyCanvasGroup) return;
@@ -129,6 +139,29 @@ public class JoinRoomController : MonoBehaviour
             });
     }
         
+     
+    //呱：这是用于控制 输入房间名字 的确认按钮 的显示
+    //    拖动赋值的时候拖给 InputField的 OnValueChanged函数
+    public void SetButtonStateForSearchRoom(string nowInputText)
+    {
+        hasText = !string.IsNullOrEmpty(nowInputText);
+        if (searchButton.gameObject.activeSelf != hasText)
+        {
+            searchButton.gameObject.SetActive(hasText);
+        }
         
+    }
+
+
+    //呱：当按下搜索按钮的时候
+    public void OnClickSearchRoomButton()
+    {
+        //呱：这里留一行逻辑 就是要把获取的房间名拿去搜索
+        //    根据返回的结果 来指定 显示的界面
+        //    就先按那边获取资料的函数的返回值 是布尔变量 来进行判断
+        
+        canvasParticalMoveEffect.CanvasSlideIn();
+
+    }    
     
 }

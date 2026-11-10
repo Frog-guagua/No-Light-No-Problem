@@ -24,20 +24,25 @@ public class CanvasMoveEffect : MonoBehaviour
     public Ease hideEaseType;
     
     private RectTransform rectTransform;
+    
+    private CanvasGroup canvasGroup;
 
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
     }
     
     public void MoveToShow()
     {
         rectTransform.DOAnchorPos(showPos,showDuration).SetEase(showEaseType);
+        canvasGroup.DOFade(1, showDuration/2).SetEase(showEaseType);
     }
 
     public void MoveToHide()
     {
         rectTransform.DOAnchorPos(hidePos,hideDuration).SetEase(hideEaseType);
+        canvasGroup.DOFade(0, hideDuration/2).SetEase(hideEaseType);
     }
 
 }
