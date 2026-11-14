@@ -4797,19 +4797,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subCanvasGroupsList:
-  - startPos: {x: 0, y: 65}
-    endPos: {x: 0, y: 182}
-    canvasGroup: {fileID: 2066244676}
+  - hidePos: {x: 0, y: 65}
+    showPos: {x: 0, y: 177}
     rectTransform: {fileID: 2066244675}
     moveDuration: 0.3
     moveEase: 1
-  - startPos: {x: 48, y: 65}
-    endPos: {x: 48, y: 182}
-    canvasGroup: {fileID: 1800668553}
+    canvasGroup: {fileID: 2066244676}
+  - hidePos: {x: 48, y: 63}
+    showPos: {x: 48, y: 175}
     rectTransform: {fileID: 1800668552}
     moveDuration: 0.3
     moveEase: 2
-  waitingTime: 0
+    canvasGroup: {fileID: 1800668553}
+  waitingTime: 0.1
 --- !u!1 &751988340
 GameObject:
   m_ObjectHideFlags: 0
